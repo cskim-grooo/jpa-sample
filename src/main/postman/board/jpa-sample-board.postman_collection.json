@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "3eee21f2-a771-464e-ad2e-2295dfbdc767",
+		"name": "jpa-sample-board",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12801604",
+		"_collection_link": "https://dark-space-778208.postman.co/workspace/spice~4b42c806-e7f4-4454-bb88-ac6536298313/collection/12801604-3eee21f2-a771-464e-ad2e-2295dfbdc767?action=share&source=collection_link&creator=12801604"
+	},
+	"item": [
+		{
+			"name": "게시글 등록",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwibG9naW5JZCI6ImlkNGdycHBwIiwiaWF0IjoxNzM2ODM3MjI5LCJleHAiOjE3MzY4NDA4Mjl9.jz8IIVaO7PA_GS7XM030xzwwkA3YFz2exJfFxD2VGoA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\" : \"test\",\n    \"content\" : \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/board/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"board",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "\b게시판 전체목록",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwibG9naW5JZCI6ImlkNGdycHBwIiwiaWF0IjoxNzM2ODM3MjI5LCJleHAiOjE3MzY4NDA4Mjl9.jz8IIVaO7PA_GS7XM030xzwwkA3YFz2exJfFxD2VGoA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/board/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"board",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "게시글 업데이트",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwibG9naW5JZCI6ImlkNGdycHBwIiwiaWF0IjoxNzM2ODY3NTkzLCJleHAiOjE3MzY4NzExOTN9.acO8hy8FC2W0usrMkQLHCKNVzW7YmAenDP4TfP1WoA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"update_title\",\n    \"content\": \"update_content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/board/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"board",
+						"11"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"update_title\",\n    \"content\": \"update_content\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/board/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"11"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 14 Jan 2025 15:13:28 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 11,\n    \"title\": \"update_title\",\n    \"content\": \"update_content\",\n    \"viewCount\": 0,\n    \"dateCreated\": \"2025-01-14T07:42:39\",\n    \"creator\": {\n        \"id\": 3,\n        \"name\": \"test\"\n    },\n    \"lastUpdator\": {\n        \"id\": 3,\n        \"name\": \"test\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "게시글 논리삭제",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwibG9naW5JZCI6ImlkNGdycHBwIiwiaWF0IjoxNzM2ODY3NTkzLCJleHAiOjE3MzY4NzExOTN9.acO8hy8FC2W0usrMkQLHCKNVzW7YmAenDP4TfP1WoA4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/board/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"board",
+						"11"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/board/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"board",
+								"11"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "22"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 14 Jan 2025 15:58:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "삭제되었습니다."
+				}
+			]
+		}
+	]
+}

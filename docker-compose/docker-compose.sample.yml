@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  admin-db:
+    image: grooo/admin-db
+    build:
+      context: ../admin-db
+      dockerfile: mariadb.Dockerfile
+    container_name: "admin-db"
+    ports:
+      - "3306:3306" # MariaDB 포트를 호스트의 3306 포트와 연결
+    environment:
+      - MYSQL_ROOT_PASSWORD=fnxmvotmdnjem~!
+    volumes:
+      - ../admin-db/docker-data/db_volumes:/var/lib/mysql
+      - ../admin-db/docker-data/log/binary:/var/log/mysql/binary
+      - ../admin-db/docker-data/log/error:/var/log/mysql/error
+      - ../admin-db/docker-data/log/general:/var/log/mysql/general
+      - ../admin-db/docker-data/log/slow:/var/log/mysql/slow
+      - ../admin-db/initdb:/docker-entrypoint-initdb.d
+
+  spring-boot-app:
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    container_name: "spring-boot-app"
+    ports:
+      - "8080:8080"
+    environment:
+      DB_ADDR: jdbc:mariadb://admin-db:3306/jpa
+      DB_USERNAME: grooo-sample
+      DB_PASSWORD: grooo~!
+      DB_LOGLEVEL: DEBUG
+    depends_on:
+      - admin-db
