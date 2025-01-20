@@ -395,7 +395,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"loginId\": \"id4grppp\",\n    \"password\": \"test1234\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\"\n}",
+					"raw": "{\n    \"loginId\": \"test\",\n    \"password\": \"test1234\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\",\n    \"roleIds\": [2]\n}",
 					"options": {
 						"raw": {
 							"language": "json"

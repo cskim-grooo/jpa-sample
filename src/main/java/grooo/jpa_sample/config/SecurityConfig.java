@@ -1,7 +1,7 @@
 package grooo.jpa_sample.config;
 
-import grooo.jpa_sample.common.util.JwtAuthenticationFilter;
-import grooo.jpa_sample.common.util.JwtUtil;
+import grooo.jpa_sample.config.security_filter.JwtAuthenticationFilter;
+import grooo.jpa_sample.config.security_filter.RoleAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration  // 설정 클래스임을 명시
@@ -17,8 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor // final, nonNull로 선언된 객체를 자동으로 주입시켜줌.
 public class SecurityConfig {
 
-    private final JwtUtil jwtUtil;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final RoleAuthorizationFilter roleAuthorizationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -31,14 +34,18 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 // 세션 사용 안 함 (Stateless -> JWT)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // 예외 처리 설정 (401 Unauthorized 반환=
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(customAuthenticationEntryPoint))
+                // 예외 처리 설정 (401, 403)
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                )
                 // URL별 접근 권한 설정
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()  // 로그인, 회원가입은 허용
                         .anyRequest().authenticated()             // 나머지는 인증(토큰) 필요
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);  // JWT 필터 등록;
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // JWT 필터 등록;
+                .addFilterAfter(roleAuthorizationFilter, ExceptionTranslationFilter.class); // Role 필터 등록
         return http.build();
     }
 }

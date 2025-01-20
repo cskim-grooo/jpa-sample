@@ -9,8 +9,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -22,15 +20,14 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setContentType("application/json; charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        String exception = (String) request.getAttribute("exception");
         String errorMessage;
-        if ("ExpiredJwtException".equals(exception)) {
-            errorMessage = "토큰이 만료되었습니다.";
-        } else if ("JwtException".equals(exception)) {
-            errorMessage = "잘못된 토큰입니다.";
-        } else {
-            errorMessage = "인증이 필요합니다.";
+        String exception = (String) request.getAttribute("exception");
+        switch (exception) {
+            case "ExpiredJwtException" -> errorMessage = "토큰이 만료되었습니다.";
+            case "JwtException" -> errorMessage = "잘못된 토큰입니다.";
+            case null, default -> errorMessage = "인증이 필요합니다.";
         }
+
         ErrorResponse errorResponse = new ErrorResponse(HttpServletResponse.SC_UNAUTHORIZED, errorMessage);
         response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
     }

@@ -1,8 +1,12 @@
-package grooo.jpa_sample.common.util;
+package grooo.jpa_sample.config.security_filter;
 
+import grooo.jpa_sample.common.util.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
@@ -13,14 +17,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -34,9 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 if (claims != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     Long workerId = jwtUtil.getWorkerId(token);
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(workerId, null, Collections.emptyList());
+                            new UsernamePasswordAuthenticationToken(workerId, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-
                     request.setAttribute("workerId", workerId);
                 }
             }
