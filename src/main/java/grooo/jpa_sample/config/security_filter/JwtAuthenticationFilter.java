@@ -44,17 +44,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException ex) {
-            // 토큰 만료
             request.setAttribute("exception", "ExpiredJwtException");
-            throw new RuntimeException("토큰이 만료되었습니다.", ex);
+            throw ex;
         } catch (JwtException ex) {
-            // 잘못된 토큰
             request.setAttribute("exception", "JwtException");
-            throw new RuntimeException("잘못된 토큰입니다.", ex);
+            throw ex;
         } catch (Exception ex) {
-            // 기타 오류
             request.setAttribute("exception", "Exception");
-            throw new RuntimeException("인증에 실패하였습니다.", ex);
+            throw ex;
         }
     }
 }

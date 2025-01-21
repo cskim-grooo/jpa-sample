@@ -1,8 +1,8 @@
 package grooo.jpa_sample.api.board.dto;
 
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 @Getter
 public class RequestBoard {
@@ -11,10 +11,10 @@ public class RequestBoard {
 
     public void basicValidate() {
         if (title == null || title.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "title : 필수값 입니다.");
+            throw new CustomException(ErrorCode.REQUIRED_FIELD, "title");
         }
         if (title.length() > 100) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "title : 100자 이하여야 합니다.");
+            throw new CustomException(ErrorCode.MAX_SIZE_EXCEEDED, "title", 100);
         }
     }
 }

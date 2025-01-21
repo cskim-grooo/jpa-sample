@@ -1,5 +1,7 @@
 package grooo.jpa_sample.config.security_filter;
 
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import grooo.jpa_sample.common.util.AuthUtil;
 import grooo.jpa_sample.config.security_filter.service.AuthorizationService;
 import jakarta.servlet.FilterChain;
@@ -29,7 +31,7 @@ public class RoleAuthorizationFilter extends OncePerRequestFilter {
         String requestUri = request.getRequestURI();
         String httpMethod = request.getMethod();
         if (!authorizationService.hasPermission(workerId, requestUri, httpMethod)) {
-            throw new org.springframework.security.access.AccessDeniedException("권한이 없습니다.");
+            throw new org.springframework.security.access.AccessDeniedException(ErrorCode.AUTH_PERMISSION_DENIED.getMessageKey());
         }
         filterChain.doFilter(request, response);
     }

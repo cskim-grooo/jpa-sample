@@ -5,17 +5,15 @@ import grooo.jpa_sample.api.board.dto.RequestBoard;
 import grooo.jpa_sample.api.board.dto.ResponseBoard;
 import grooo.jpa_sample.api.board.repository.BoardRepository;
 import grooo.jpa_sample.common.dto.PaginatedResponse;
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -52,14 +50,14 @@ public class BoardService {
     @Transactional
     public ResponseBoard updateBoard(Long boardId, Long workerId, RequestBoard request) {
         Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_RECORD));
         board.updateBoard(request.getTitle(), request.getContent(), workerId);
         return ResponseBoard.build(board);
     }
 
     public void deleteBoard(Long boardId, Long workerId) {
         boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_RECORD));
 
         boardRepository.softDelete(boardId, workerId);
     }

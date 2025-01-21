@@ -134,7 +134,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"loginId\": \"id4grooo\",\n    \"password\": \"test1234\"\n}",
+					"raw": "{\n\t\"loginId\": \"test\",\n    \"password\": \"test1234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -392,10 +392,16 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "ko",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"loginId\": \"test\",\n    \"password\": \"test1234\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\",\n    \"roleIds\": [2]\n}",
+					"raw": "{\n    \"loginId\": \"test\",\n    \"password\": \"\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\",\n    \"roleIds\": [2]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -421,10 +427,16 @@
 					"name": "회원가입",
 					"originalRequest": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ko",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"loginId\": \"id4grppp\",\n    \"password\": \"test1234\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\"\n}",
+							"raw": "{\n    \"loginId\": \"test1234\",\n    \"password\": \"test1234\",\n    \"name\": \"test\",\n    \"email\": \"test@grooo.co.jp\",\n    \"expiryDate\": \"2025-12-31T23:59:59\",\n    \"roleIds\": [2]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -444,8 +456,8 @@
 							]
 						}
 					},
-					"status": "Internal Server Error",
-					"code": 500,
+					"status": "Bad Request",
+					"code": 400,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -482,7 +494,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 13 Jan 2025 17:07:31 GMT"
+							"value": "Tue, 21 Jan 2025 07:08:11 GMT"
 						},
 						{
 							"key": "Connection",
@@ -490,7 +502,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"status\": 500,\n    \"message\": \"이미 사용 중인 LoginID 입니다.\"\n}"
+					"body": "{\n    \"status\": 400,\n    \"message\": \"비밀번호는 로그인 ID와 같을 수 없습니다.\"\n}"
 				}
 			]
 		},

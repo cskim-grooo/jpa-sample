@@ -12,6 +12,12 @@ spring:
         format_sql: true
         show_sql: true
     open-in-view: false
+  messages:
+    basename: i18n/messages,i18n/args
+    cache-duration: 3600
+    encoding: UTF-8
+  web:
+    locale: ja
 logging.level:
     org.hibernate:
       type: trace

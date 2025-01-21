@@ -1,12 +1,12 @@
 package grooo.jpa_sample.api.board.domain;
 
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import grooo.jpa_sample.common.model.BaseBoard;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Where;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 @Entity(name = "Board")
 @Getter
@@ -25,7 +25,7 @@ public class Board extends BaseBoard {
 
     public void createValidate() {
         if (getCreatorId() == null || getLastUpdatorId() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "작성자 정보가 없습니다.");
+            throw new CustomException(ErrorCode.AUTH_TOKEN_UNAVAILABLE);
         }
     }
 

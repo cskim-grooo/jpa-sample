@@ -8,6 +8,8 @@ import grooo.jpa_sample.api.auth.dto.SignupRequest;
 import grooo.jpa_sample.api.auth.repository.WorkerLoginLogRepository;
 import grooo.jpa_sample.api.auth.repository.WorkerRepository;
 import grooo.jpa_sample.api.auth.repository.WorkerRoleRepository;
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import grooo.jpa_sample.common.model.composite_key.WorkerRoleId;
 import grooo.jpa_sample.common.service.PasswordEncoderService;
 import grooo.jpa_sample.common.util.JwtUtil;
@@ -31,10 +33,10 @@ public class AuthService {
 
     public String login(LoginRequest request) {
         Worker worker = workerRepository.findByLoginId(request.getLoginId())
-                .orElseThrow(() -> new IllegalArgumentException("사용자가 존재하지 않습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_EXIST_LOGIN_ID));
 
         if ( ! passwordEncoderService.checkPassword(request.getPassword(), worker.getPassword() ) ) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new CustomException(ErrorCode.LOGIN_PASSWORD_MISMATCH);
         }
 
         WorkerLoginLog loginLog = WorkerLoginLog.builder()
@@ -49,7 +51,7 @@ public class AuthService {
     @Transactional
     public void signup(SignupRequest request) {
         if (workerRepository.existsByLoginId(request.getLoginId())) {
-            throw new IllegalArgumentException("이미 사용 중인 LoginID 입니다.");
+            throw new CustomException(ErrorCode.SIGNUP_EXIST_LOGIN_ID);
         }
 
         Worker worker = toDomainWorker(request);
