@@ -17,7 +17,7 @@ public class LocaleConfig {
     @Bean
     public LocaleResolver localeResolver() {
         AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
-        resolver.setDefaultLocale(defaultLocale); // 기본 로케일 강제 설정
+        resolver.setDefaultLocale(defaultLocale);
         return resolver;
     }
 }
