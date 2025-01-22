@@ -18,6 +18,7 @@ spring:
     encoding: UTF-8
   web:
     locale: ja
+    locale-resolver: accept-header
 logging.level:
     org.hibernate:
       type: trace

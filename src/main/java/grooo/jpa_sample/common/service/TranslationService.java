@@ -28,7 +28,6 @@ public class TranslationService {
         }
         return Arrays.stream(args).map(arg -> {
             if (arg instanceof String) {
-                System.out.println("arg=>"+arg);
                 return translateMessage((String) arg);
             }
             return arg;

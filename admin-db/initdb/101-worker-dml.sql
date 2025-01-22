@@ -20,12 +20,14 @@ INSERT INTO function (id, code, name, url, http_method) VALUES (1, 'CREATE_BOARD
 INSERT INTO function (id, code, name, url, http_method) VALUES (2, 'READ_BOARDS',   '게시판조회', '/board', 'GET');
 INSERT INTO function (id, code, name, url, http_method) VALUES (3, 'UPDATE_BOARDS', '게시판수정', '/board', 'PUT');
 INSERT INTO function (id, code, name, url, http_method) VALUES (4, 'DELETE_BOARDS', '게시판삭제', '/board', 'DELETE');
+INSERT INTO function (id, code, name, url, http_method) VALUES (5, 'READ_PARTNERS', '파트너조회', '/partner', 'GET');
 
 ### 관리자권한
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 1, 1, '2020-01-21 10:07:27'); # C
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 2, 1, '2020-01-21 10:07:27'); # R
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 3, 1, '2020-01-21 10:07:27'); # U
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 4, 1, '2020-01-21 10:07:27'); # D
+INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 5, 1, '2020-01-21 10:07:27'); # D
 
 ### 작업자권한
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 1, 1, '2020-01-21 10:07:27'); # C

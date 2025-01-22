@@ -2,6 +2,8 @@ package grooo.jpa_sample.config;
 
 import grooo.jpa_sample.config.security_filter.JwtAuthenticationFilter;
 import grooo.jpa_sample.config.security_filter.RoleAuthorizationFilter;
+import grooo.jpa_sample.config.security_filter.exception.CustomAccessDeniedHandler;
+import grooo.jpa_sample.config.security_filter.exception.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

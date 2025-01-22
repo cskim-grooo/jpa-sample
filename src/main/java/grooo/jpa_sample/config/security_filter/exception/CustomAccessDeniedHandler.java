@@ -1,4 +1,4 @@
-package grooo.jpa_sample.config;
+package grooo.jpa_sample.config.security_filter.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import grooo.jpa_sample.common.exception.ErrorCode;
@@ -12,6 +12,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.LocaleResolver;
 
 import java.io.IOException;
 
@@ -21,10 +22,12 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final TranslationService translationService;
+    private final LocaleResolver localeResolver;
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException)
             throws IOException {
+        LocaleContextHolder.setLocale(localeResolver.resolveLocale(request));
         ErrorCode permissionDenied = ErrorCode.AUTH_PERMISSION_DENIED;
         String localizedMessage = translationService.translateMessage(permissionDenied.getMessageKey());
 

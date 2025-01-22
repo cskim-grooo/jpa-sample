@@ -1,12 +1,10 @@
-package grooo.jpa_sample.api.board.dto;
+package grooo.jpa_sample.api.partner.dto;
 
-import grooo.jpa_sample.api.board.domain.Worker;
+import grooo.jpa_sample.api.partner.domain.Worker;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
-@ToString
 @AllArgsConstructor
 public class ResponseWorker {
     private Long id;
