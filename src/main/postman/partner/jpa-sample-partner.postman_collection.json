@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "c80431d5-7337-4c3e-a6db-93f648b10855",
+		"name": "jpa-sample-partner",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12801604",
+		"_collection_link": "https://dark-space-778208.postman.co/workspace/spice~4b42c806-e7f4-4454-bb88-ac6536298313/collection/12801604-c80431d5-7337-4c3e-a6db-93f648b10855?action=share&source=collection_link&creator=12801604"
+	},
+	"item": [
+		{
+			"name": "파트너i18n조회",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwibG9naW5JZCI6InRlc3QiLCJpYXQiOjE3Mzc1MTUwMDYsImV4cCI6MTczNzUxODYwNn0.d9rbIcUNvkx6W-I6pp2Pw_E79Yur64us-E3_-LEcceo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/partner/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"partner",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ko",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/partner/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partner",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 22 Jan 2025 04:18:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"faxNo\": \"02-12-32-12\",\n    \"dateCreated\": \"2021-02-02T13:55:26\",\n    \"creator\": {\n        \"id\": 1,\n        \"name\": \"id4grooo\"\n    },\n    \"lastUpdator\": {\n        \"id\": 1,\n        \"name\": \"id4grooo\"\n    },\n    \"responsePartnerI18n\": {\n        \"partnerId\": 1,\n        \"languageId\": 87,\n        \"name\": \"일본\",\n        \"address\": \"주소\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
