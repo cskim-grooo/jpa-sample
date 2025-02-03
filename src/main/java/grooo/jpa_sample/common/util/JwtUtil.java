@@ -1,5 +1,7 @@
 package grooo.jpa_sample.common.util;
 
+import grooo.jpa_sample.common.exception.CustomException;
+import grooo.jpa_sample.common.exception.ErrorCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -24,7 +26,7 @@ public class JwtUtil {
 
     @PostConstruct
     public void init() {
-        if (secret == null || secret.isEmpty()) throw new IllegalArgumentException("JWT 비밀 키가 설정되지 않았습니다.");
+        if (secret == null || secret.isEmpty()) throw new CustomException(ErrorCode.UNHANDLED_SERVER_ERROR);
 
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
