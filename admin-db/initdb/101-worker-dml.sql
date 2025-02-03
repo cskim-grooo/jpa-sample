@@ -22,6 +22,7 @@ INSERT INTO function (id, code, name, url, http_method) VALUES (3, 'UPDATE_BOARD
 INSERT INTO function (id, code, name, url, http_method) VALUES (4, 'DELETE_BOARDS', '게시판삭제', '/board', 'DELETE');
 INSERT INTO function (id, code, name, url, http_method) VALUES (5, 'READ_PARTNERS', '파트너조회', '/partner', 'GET');
 INSERT INTO function (id, code, name, url, http_method) VALUES (6, 'EXPORT_CONVERT', '변환&다운로드', '/converter', 'GET');
+INSERT INTO function (id, code, name, url, http_method) VALUES (7, 'IMPORT_CONVERT', '업로드', '/converter', 'POST');
 
 ### 관리자권한
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 1, 1, '2020-01-21 10:07:27'); # C
@@ -30,6 +31,7 @@ INSERT INTO role_function(role_id, function_id, creator_id, date_created) values
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 4, 1, '2020-01-21 10:07:27'); # D
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 5, 1, '2020-01-21 10:07:27'); # R
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 6, 1, '2020-01-21 10:07:27'); # R
+INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (1, 7, 1, '2020-01-21 10:07:27'); # R
 
 ### 작업자권한
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 1, 1, '2020-01-21 10:07:27'); # C
@@ -37,8 +39,10 @@ INSERT INTO role_function(role_id, function_id, creator_id, date_created) values
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 3, 1, '2020-01-21 10:07:27'); # U
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 5, 1, '2020-01-21 10:07:27'); # R
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 6, 1, '2020-01-21 10:07:27'); # R
+INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (2, 7, 1, '2020-01-21 10:07:27'); # R
 
 ## 직원
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (3, 2, 1, '2020-01-21 10:07:27'); # R
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (3, 5, 1, '2020-01-21 10:07:27'); # R
 INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (3, 6, 1, '2020-01-21 10:07:27'); # R
+INSERT INTO role_function(role_id, function_id, creator_id, date_created) values (3, 7, 1, '2020-01-21 10:07:27'); # R
