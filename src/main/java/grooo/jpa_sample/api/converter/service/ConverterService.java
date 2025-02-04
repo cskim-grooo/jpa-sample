@@ -5,12 +5,15 @@ import grooo.jpa_sample.api.converter.dto.ResponseFile;
 import grooo.jpa_sample.api.converter.dto.ResponseImport;
 import grooo.jpa_sample.api.converter.repository.LanguageRepository;
 import grooo.jpa_sample.api.converter.service.excel.ExcelService;
+import grooo.jpa_sample.api.converter.service.pdf.PdfService;
+import grooo.jpa_sample.common.util.TemplateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static java.lang.Long.parseLong;
@@ -20,6 +23,7 @@ import static java.lang.Long.parseLong;
 public class ConverterService {
     private final LanguageRepository languageRepository;
     private final ExcelService excelService;
+    private final PdfService pdfService;
 
     public ResponseFile exportLanguages() {
         List<Language> languages = languageRepository.findAll();
@@ -62,4 +66,58 @@ public class ConverterService {
         }
         return result;
     }
+
+    public ResponseFile generatePdfWithLanguages() {
+        List<Language> languages = languageRepository.findAll();
+
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("title", "HTML TO PDF CONVERT TEST");
+        variables.put("languages", languages);
+        String processedHtml = TemplateUtil.buildHtml(exampleHtmlTemplate(), variables);
+
+        byte[] pdfByte = pdfService.generatePdf(processedHtml);
+
+        return new ResponseFile("example.pdf", pdfByte);
+    }
+
+    private String exampleHtmlTemplate() {
+        return """
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1 { color: blue; }
+            table { width: 100%%; border-collapse: collapse; margin-top: 20px; }
+            th, td { border: 1px solid black; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+        </style>
+    </head>
+    <body>
+        <h1>${title}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>CODE</th>
+                    <th>LCID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list languages as lang>
+                    <tr>
+                        <td>${lang.id}</td>
+                        <td>${lang.name}</td>
+                        <td>${lang.code}</td>
+                        <td>${lang.lcid}</td>
+                    </tr>
+                </#list>
+            </tbody>
+        </table>
+    </body>
+    </html>
+        """;
+    }
 }
+
+
